@@ -64,6 +64,18 @@ namespace SRGPromotionEngine.PromotionApp
                         sum += (promo.PromoPrice * count);
                     }
                 }
+                else
+                {
+                    foreach (var item in promo.ProductsInfo)
+                    {
+                        if (dict.ContainsKey(item.Key))
+                        {
+                            dict[item.Key]--;
+                            sum += (decimal)(item.Value * productPricePairs[item.Key]);
+                        }
+                    }
+
+                }
             }
 
             // would also work as a fallback
