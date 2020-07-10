@@ -130,21 +130,6 @@ namespace SRGPromotionEngine.PromotionApp.UnitTests
         public void ApplyPromotionToGetTotalSum_ProductPriceDictionaryIsEmpty_ThrowArgumentNullException()
         {
 
-            // Arrange
-            Dictionary<string, double> pinfo1 = new Dictionary<string, double>();
-            pinfo1.Add("A", 3);
-            Dictionary<string, double> pinfo2 = new Dictionary<string, double>();
-            pinfo2.Add("B", 2);
-            Dictionary<string, double> pinfo3 = new Dictionary<string, double>();
-            pinfo3.Add("C", 2);
-
-            List<Promotion> promotions = new List<Promotion>()
-            {
-                new Promotion(1, pinfo1, 130),
-                new Promotion(2, pinfo2, 45),
-                new Promotion(3, pinfo3, 30)
-            };
-
             List<Order> orders = new List<Order>();
 
             orders.AddRange(new Order[] {
@@ -173,7 +158,7 @@ namespace SRGPromotionEngine.PromotionApp.UnitTests
 
             // Assert
 
-            Assert.That(() => PromotionEngine.ApplyPromotionToGetTotalSum(orders, promotions, new Dictionary<string, int>()), Throws.ArgumentNullException);
+            Assert.That(() => PromotionEngine.ApplyPromotionToGetTotalSum(orders, new List<Promotion>(), new Dictionary<string, int>()), Throws.ArgumentNullException);
 
         }
 
