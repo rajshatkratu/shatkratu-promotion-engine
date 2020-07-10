@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30204.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SRGPromotionEngine.PromotionApp", "SRGPromotionEngine.PromotionApp\SRGPromotionEngine.PromotionApp.csproj", "{BD6892D7-B782-41B8-BBAD-39E0906FEE45}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SRGPromotionEngine.PromotionApp.UnitTests", "SRGPromotionEngine.PromotionApp.UnitTests\SRGPromotionEngine.PromotionApp.UnitTests.csproj", "{EBD3AD22-1942-4D1B-90A5-21C02792B6B7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BD6892D7-B782-41B8-BBAD-39E0906FEE45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD6892D7-B782-41B8-BBAD-39E0906FEE45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD6892D7-B782-41B8-BBAD-39E0906FEE45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD6892D7-B782-41B8-BBAD-39E0906FEE45}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBD3AD22-1942-4D1B-90A5-21C02792B6B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBD3AD22-1942-4D1B-90A5-21C02792B6B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBD3AD22-1942-4D1B-90A5-21C02792B6B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBD3AD22-1942-4D1B-90A5-21C02792B6B7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6591F7C4-81A5-4366-8C79-5AD9A8F109C0}
+	EndGlobalSection
+EndGlobal
