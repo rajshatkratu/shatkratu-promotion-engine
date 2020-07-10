@@ -35,6 +35,38 @@ namespace SRGPromotionEngine.PromotionApp
                 Count = x.Count()
             }).ToDictionary(x => x.Id, y => y.Count);
 
+
+            foreach (var promo in promotions)
+            {
+                // to check if promo price is given in advance for a rule
+                if (promo.IsCalculatedPriceGiven)
+                {
+                    bool isValidPromo = true;
+
+                    foreach (var item in promo.ProductsInfo)
+                    {
+                        if (!dict.ContainsKey(item.Key) || dict[item.Key] < item.Value)
+                        {
+                            isValidPromo = false;
+                            break;
+                        }
+                    }
+
+                    if (isValidPromo)
+                    {
+                        int count = 0;
+                        foreach (var item in promo.ProductsInfo)
+                        {
+                            count = (int)(dict[item.Key] / item.Value);
+                            dict[item.Key] = dict[item.Key] % (int)item.Value;
+                        }
+
+                        sum += (promo.PromoPrice * count);
+                    }
+                }
+            }
+
+            // would also work as a fallback
             foreach (var item in dict)
             {
                 if (item.Value > 0)
