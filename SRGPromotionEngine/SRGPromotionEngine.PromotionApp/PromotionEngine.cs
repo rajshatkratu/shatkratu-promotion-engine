@@ -43,7 +43,7 @@ namespace SRGPromotionEngine.PromotionApp
                 }
             }
 
-            return 0m;
+            return sum;
         }
     }
 }

@@ -130,49 +130,13 @@ namespace SRGPromotionEngine.PromotionApp.UnitTests
         public void ApplyPromotionToGetTotalSum_ProductPriceDictionaryIsEmpty_ThrowArgumentNullException()
         {
 
-            List<Order> orders = new List<Order>();
-
-            orders.AddRange(new Order[] {
-                new Order()
-                {
-                    OrderId =1,
-                    Products = new List<Product>
-                    {
-                        new Product
-                        {
-                            Id = "A"
-                        },
-                        new Product
-                        {
-                            Id = "B"
-                        },
-                        new Product
-                        {
-                            Id = "C"
-                        }
-                    }
-                }
-            });
-
-
-
-            // Assert
-
-            Assert.That(() => PromotionEngine.ApplyPromotionToGetTotalSum(orders, new List<Promotion>(), new Dictionary<string, int>()), Throws.ArgumentNullException);
-
-        }
-
-        [Test]
-        public void ApplyPromotionToGetTotalSum_NoPromotionApplied_ReturnExpectedSum_Example1()
-        {
             // Arrange
             Dictionary<string, double> pinfo1 = new Dictionary<string, double>();
             pinfo1.Add("A", 3);
             Dictionary<string, double> pinfo2 = new Dictionary<string, double>();
             pinfo2.Add("B", 2);
             Dictionary<string, double> pinfo3 = new Dictionary<string, double>();
-            pinfo3.Add("C", 1);
-            pinfo3.Add("D", 1);
+            pinfo3.Add("C", 2);
 
             List<Promotion> promotions = new List<Promotion>()
             {
@@ -205,8 +169,45 @@ namespace SRGPromotionEngine.PromotionApp.UnitTests
                 }
             });
 
+
+
+            // Assert
+
+            Assert.That(() => PromotionEngine.ApplyPromotionToGetTotalSum(orders, promotions, new Dictionary<string, int>()), Throws.ArgumentNullException);
+
+        }
+
+        [Test]
+        public void ApplyPromotionToGetTotalSum_NoPromotionApplied_ReturnExpectedSum_Example1()
+        {
+            // Arrange
+            
+            List<Order> orders = new List<Order>();
+
+            orders.AddRange(new Order[] {
+                new Order()
+                {
+                    OrderId =1,
+                    Products = new List<Product>
+                    {
+                        new Product
+                        {
+                            Id = "A"
+                        },
+                        new Product
+                        {
+                            Id = "B"
+                        },
+                        new Product
+                        {
+                            Id = "C"
+                        }
+                    }
+                }
+            });
+
             // Act 
-            decimal result = PromotionEngine.ApplyPromotionToGetTotalSum(orders, promotions, _productPricePairs);
+            decimal result = PromotionEngine.ApplyPromotionToGetTotalSum(orders, new List<Promotion>(), _productPricePairs);
 
             // Assert
 
