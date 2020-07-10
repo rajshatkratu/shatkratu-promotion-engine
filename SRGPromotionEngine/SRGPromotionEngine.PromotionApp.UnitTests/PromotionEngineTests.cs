@@ -407,6 +407,101 @@ namespace SRGPromotionEngine.PromotionApp.UnitTests
 
         }
 
+        [Test]
+        public void ApplyPromotionToGetTotalSum_AfterApplyingValidPromotionIncludingPercentageScenario_ReturnExpectedSum()
+        {
+            // Arrange
+            Dictionary<string, double> pinfo1 = new Dictionary<string, double>();
+            pinfo1.Add("A", 3);
+            Dictionary<string, double> pinfo2 = new Dictionary<string, double>();
+            pinfo2.Add("B", 2);
+            Dictionary<string, double> pinfo3 = new Dictionary<string, double>();
+            pinfo3.Add("C", 2);
+            Dictionary<string, double> pinfo4 = new Dictionary<string, double>();
+            pinfo4.Add("D", 0.5);
 
+            List<Promotion> promotions = new List<Promotion>()
+            {
+                new Promotion(1, pinfo1, 130),
+                new Promotion(2, pinfo2, 45),
+                new Promotion(3, pinfo3, 30),
+                new Promotion(4, pinfo4, 0m, false) // to include %
+            };
+
+            List<Order> orders = new List<Order>();
+
+            orders.AddRange(new Order[] {
+                new Order()
+                {
+                    OrderId =1,
+                    Products = new List<Product>
+                    {
+                        new Product
+                        {
+                            Id = "A"
+                        },
+                        new Product
+                        {
+                            Id = "B"
+                        },
+                        new Product
+                        {
+                            Id = "C"
+                        }
+                    }
+                },
+                 new Order()
+                {
+                    OrderId =2,
+                    Products = new List<Product>
+                    {
+                        new Product
+                        {
+                            Id = "A"
+                        },
+                        new Product
+                        {
+                            Id = "A"
+                        },
+                        new Product
+                        {
+                            Id = "A"
+                        },
+                        new Product
+                        {
+                            Id = "A"
+                        },
+                        new Product
+                        {
+                            Id = "B"
+                        },
+                        new Product
+                        {
+                            Id = "B"
+                        },
+                        new Product
+                        {
+                            Id = "B"
+                        },
+                        new Product
+                        {
+                            Id = "B"
+                        },
+                        new Product
+                        {
+                            Id = "D"
+                        }
+                    }
+                }
+            });
+
+            // Act 
+            decimal result = PromotionEngine.ApplyPromotionToGetTotalSum(orders, promotions, _productPricePairs);
+
+            // Assert
+
+            Assert.That(result, Is.EqualTo(377.5m));
+
+        }
     }
 }
