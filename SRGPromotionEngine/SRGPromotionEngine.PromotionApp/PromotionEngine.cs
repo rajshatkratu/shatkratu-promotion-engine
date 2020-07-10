@@ -22,6 +22,12 @@ namespace SRGPromotionEngine.PromotionApp
                 return sum;
             }
 
+
+            if (productPricePairs == null || productPricePairs.Count <= 0)
+            {
+                throw new ArgumentNullException();
+            }
+
             return 0m;
         }
     }
