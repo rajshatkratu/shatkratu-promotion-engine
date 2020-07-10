@@ -15,6 +15,13 @@ namespace SRGPromotionEngine.PromotionApp
         /// <returns>total sum price of the orders after applying promotion</returns>
         public static decimal ApplyPromotionToGetTotalSum(List<Order> orders, List<Promotion> promotions, Dictionary<string, int> productPricePairs)
         {
+            decimal sum = 0m;
+
+            if (orders == null || orders.Count <= 0)
+            {
+                return sum;
+            }
+
             return 0m;
         }
     }
