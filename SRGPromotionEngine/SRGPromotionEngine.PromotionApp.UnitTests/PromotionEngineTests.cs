@@ -77,5 +77,81 @@ namespace SRGPromotionEngine.PromotionApp.UnitTests
             Assert.That(result, Is.EqualTo(0));
 
         }
+
+        [Test]
+        public void ApplyPromotionToGetTotalSum_ProductPriceDictionaryIsNull_ThrowArgumentNullException()
+        {
+            // Arrange
+            Dictionary<string, double> pinfo1 = new Dictionary<string, double>();
+            pinfo1.Add("A", 3);
+            Dictionary<string, double> pinfo2 = new Dictionary<string, double>();
+            pinfo2.Add("B", 2);
+            Dictionary<string, double> pinfo3 = new Dictionary<string, double>();
+            pinfo3.Add("C", 2);
+
+            List<Promotion> promotions = new List<Promotion>()
+            {
+                new Promotion(1, pinfo1, 130),
+                new Promotion(2, pinfo2, 45),
+                new Promotion(3, pinfo3, 30)
+            };
+
+
+            // Assert
+
+            Assert.That(() => PromotionEngine.ApplyPromotionToGetTotalSum(orders, promotions, null), Throws.ArgumentNullException);
+        }
+
+        [Test]
+        public void ApplyPromotionToGetTotalSum_ProductPriceDictionaryIsEmpty_ThrowArgumentNullException()
+        {
+
+            // Arrange
+            Dictionary<string, double> pinfo1 = new Dictionary<string, double>();
+            pinfo1.Add("A", 3);
+            Dictionary<string, double> pinfo2 = new Dictionary<string, double>();
+            pinfo2.Add("B", 2);
+            Dictionary<string, double> pinfo3 = new Dictionary<string, double>();
+            pinfo3.Add("C", 2);
+
+            List<Promotion> promotions = new List<Promotion>()
+            {
+                new Promotion(1, pinfo1, 130),
+                new Promotion(2, pinfo2, 45),
+                new Promotion(3, pinfo3, 30)
+            };
+
+            List<Order> orders = new List<Order>();
+
+            orders.AddRange(new Order[] {
+                new Order()
+                {
+                    OrderId =1,
+                    Products = new List<Product>
+                    {
+                        new Product
+                        {
+                            Id = "A"
+                        },
+                        new Product
+                        {
+                            Id = "B"
+                        },
+                        new Product
+                        {
+                            Id = "C"
+                        }
+                    }
+                }
+            });
+
+
+
+            // Assert
+
+            Assert.That(() => PromotionEngine.ApplyPromotionToGetTotalSum(orders, promotions, new Dictionary<string, int>()), Throws.ArgumentNullException);
+
+        }
+
     }
 }
