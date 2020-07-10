@@ -97,6 +97,30 @@ namespace SRGPromotionEngine.PromotionApp.UnitTests
             };
 
 
+            List<Order> orders = new List<Order>();
+
+            orders.AddRange(new Order[] {
+                new Order()
+                {
+                    OrderId =1,
+                    Products = new List<Product>
+                    {
+                        new Product
+                        {
+                            Id = "A"
+                        },
+                        new Product
+                        {
+                            Id = "B"
+                        },
+                        new Product
+                        {
+                            Id = "C"
+                        }
+                    }
+                }
+            });
+
             // Assert
 
             Assert.That(() => PromotionEngine.ApplyPromotionToGetTotalSum(orders, promotions, null), Throws.ArgumentNullException);
@@ -153,5 +177,56 @@ namespace SRGPromotionEngine.PromotionApp.UnitTests
 
         }
 
+        [Test]
+        public void ApplyPromotionToGetTotalSum_NoPromotionApplied_ReturnExpectedSum_Example1()
+        {
+            // Arrange
+            Dictionary<string, double> pinfo1 = new Dictionary<string, double>();
+            pinfo1.Add("A", 3);
+            Dictionary<string, double> pinfo2 = new Dictionary<string, double>();
+            pinfo2.Add("B", 2);
+            Dictionary<string, double> pinfo3 = new Dictionary<string, double>();
+            pinfo3.Add("C", 1);
+            pinfo3.Add("D", 1);
+
+            List<Promotion> promotions = new List<Promotion>()
+            {
+                new Promotion(1, pinfo1, 130),
+                new Promotion(2, pinfo2, 45),
+                new Promotion(3, pinfo3, 30)
+            };
+
+            List<Order> orders = new List<Order>();
+
+            orders.AddRange(new Order[] {
+                new Order()
+                {
+                    OrderId =1,
+                    Products = new List<Product>
+                    {
+                        new Product
+                        {
+                            Id = "A"
+                        },
+                        new Product
+                        {
+                            Id = "B"
+                        },
+                        new Product
+                        {
+                            Id = "C"
+                        }
+                    }
+                }
+            });
+
+            // Act 
+            decimal result = PromotionEngine.ApplyPromotionToGetTotalSum(orders, promotions, _productPricePairs);
+
+            // Assert
+
+            Assert.That(result, Is.EqualTo(100));
+
+        }
     }
 }
